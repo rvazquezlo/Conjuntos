@@ -9,7 +9,7 @@ import java.util.Iterator;
 
 /**
  *
- * @author edi
+ * @author Regina Vazquez
  */
 public class ConjuntoA<T> implements ConjuntoADT<T>{
     private T[] conjunto;
@@ -160,9 +160,9 @@ public class ConjuntoA<T> implements ConjuntoADT<T>{
         
         sb = new StringBuilder();
         iterador = this.iterator();
-        sb.append("\nConjunto de " + conjunto.getClass().getSimpleName() + "\n");
-        sb.append("\n\t Cardinalidad: " + cardinalidad);
-        sb.append("\n\t Elementos: \n\t");
+//        sb.append("\nConjunto de " + conjunto.getClass().getSimpleName() + "\n");
+//        sb.append("\n\t Cardinalidad: " + cardinalidad);
+//        sb.append("\n\t Elementos: \n\t");
         while(iterador.hasNext())
             sb.append("\t" + iterador.next());
         return sb.toString();
