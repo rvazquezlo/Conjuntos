@@ -101,7 +101,7 @@ public class Escuela {
             if(this.ingenieria.add(alumno))
                 claveAlumno = alumno.getId();
         if(licenciatura)
-            if(this.licenciatura.add(alumno) && claveAlumno != -1)
+            if(this.licenciatura.add(alumno) && claveAlumno == -1)
                 claveAlumno = alumno.getId();
         return claveAlumno;      
     }
@@ -116,9 +116,9 @@ public class Escuela {
             alumno = new Alumno(claveAlumno);
             alumnoIng = ingenieria.quita(alumno);
             alumnoLic = licenciatura.quita(alumno);
-            if(alumnoLic.equals(alumno))
+            if(alumnoLic != null && alumnoLic.equals(alumno))
                 baja = alumnoLic.toString();
-            else if(alumnoIng.equals(alumno))
+            else if(alumnoIng != null && alumnoIng.equals(alumno))
                 baja = alumnoIng.toString();      
         }
         return baja; 
@@ -151,12 +151,35 @@ public class Escuela {
         String alumnos;
         
         alumnos = "No hay alumnos que estudien licenciatura O ingenieria";
-        todos = ingenieria.diferencia(licenciatura);
+        todos = licenciatura.diferencia(ingenieria).union(ingenieria.diferencia(licenciatura));
         if(todos != null && todos.getCardinalidad() > 0)
             alumnos = todos.toString();
         return alumnos;
     }
      
-    public double
+    public double calculaPromedioIngenieria(){
+        double promedio;
+        Iterator<Alumno> iterador;
+        
+        iterador = ingenieria.iterator();
+        promedio = 0;
+        while(iterador.hasNext())
+            promedio = promedio + iterador.next().getPromedio();
+        return promedio / ingenieria.getCardinalidad();
+    }
+    
+    public int calculaAlumnosMayoresLicenciatura(int edad){
+        int alumnosMayores;
+        Iterator<Alumno> iterador;
+        
+        iterador = licenciatura.iterator();
+        alumnosMayores = 0;
+        while(iterador.hasNext())
+            if(iterador.next().getEdad() > edad)
+                alumnosMayores++;
+        return alumnosMayores;
+    }
+            
+     
     
 }

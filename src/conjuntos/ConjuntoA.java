@@ -133,6 +133,11 @@ public class ConjuntoA<T> implements ConjuntoADT<T>{
         return interseccion;
     }
 
+    /**
+     * Elementos del calling object que no estén en otro
+     * @param otro
+     * @return 
+     */
     @Override
     public ConjuntoADT<T> diferencia(ConjuntoADT<T> otro) {
         ConjuntoADT<T> diferencia;

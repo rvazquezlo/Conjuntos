@@ -29,7 +29,7 @@ public class Conjuntos {
         ConjuntoADT<Integer> c1 = new ConjuntoA<Integer>();
         ConjuntoADT<Integer> c2 = new ConjuntoA<Integer>();
         ConjuntoADT<Integer> interseccion;
-        ConjuntoADT<Integer> union;
+        ConjuntoADT<Integer> union, diferencia;
         int i;
         
         for(i = 0; i < 20; i++)
@@ -39,11 +39,36 @@ public class Conjuntos {
         
         interseccion = c1.interseccion(c2);
         union = c1.union(c2);
+        diferencia = c1.diferencia(c2);
         
         imprimeConjunto(c1);
         imprimeConjunto(c2);
         imprimeConjunto(union);
         imprimeConjunto(interseccion);
+        imprimeConjunto(diferencia);
+        
+        
+        //Pruebas Escuela
+        Escuela escuela;
+        
+        escuela = new Escuela();
+        System.out.println(escuela.altaAlumno("Regina", true, true, 10, 20));
+        System.out.println(escuela.altaAlumno("Mirko", false, true, 10, 19));
+        System.out.println(escuela.altaAlumno("Fer", true, false, 9.3, 19));
+        System.out.println(escuela.altaAlumno("enrique", false, true, 7.3, 20));
+        System.out.println(escuela.altaAlumno("MAriana", false, true, 7.8, 21));
+        System.out.println(escuela.altaAlumno("MAria", true, false, 8.1, 19));
+        System.out.println(escuela.altaAlumno("Carlos", true, false, 9.7, 17));
+        System.out.println(escuela.altaAlumno("Regina", false, false, 10, 20));
+        
+//        System.out.println(escuela.bajaAlumno(-1));
+//        System.out.println(escuela.bajaAlumno(3));
+
+        System.out.println(escuela.regresaTodosLosAlumnos());
+        System.out.println(escuela.regresaAlumnosIngLic());
+        System.out.println(escuela.regresaAlumnosIngOLic());
+        System.out.println(escuela.calculaPromedioIngenieria());
+        System.out.println(escuela.calculaAlumnosMayoresLicenciatura(18));
     }
     
 }
