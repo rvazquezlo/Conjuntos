@@ -22,5 +22,6 @@ public interface ConjuntoADT <T> extends Iterable<T>{
     Iterator<T> iterator();
     int getCardinalidad();
     String toString();
+    boolean equals(ConjuntoADT<T> otro);
     
 }

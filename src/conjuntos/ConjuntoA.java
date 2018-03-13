@@ -37,6 +37,21 @@ public class ConjuntoA<T> implements ConjuntoADT<T>{
     public boolean isEmpty(){
         return cardinalidad == 0;
     }
+
+    @Override
+    public boolean equals(ConjuntoADT<T> otro) {
+        boolean iguales;
+       
+        iguales = false;
+        if(this == otro){
+            iguales = true;
+        }
+        else if(otro != null)
+            if(cardinalidad == this.getCardinalidad())
+                if(interseccion(otro).getCardinalidad() == cardinalidad)
+                    iguales = true;
+        return iguales;
+    }
     
     public T quita(T dato){
         T resultado;

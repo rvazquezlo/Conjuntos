@@ -58,6 +58,22 @@ public class Conjuntos {
         while(iterador.hasNext())
             System.out.print(iterador.next() + " ");   
     }
+    
+    public static<T> boolean equals(ConjuntoADT<T> conjunto1, ConjuntoADT<T> conjunto2){
+        boolean iguales;
+        int cardinalidad1;
+        
+        iguales = false;
+        if(conjunto1 == conjunto2)
+            iguales = true;
+        else if(conjunto1 != null && conjunto2 != null){
+            cardinalidad1 = conjunto1.getCardinalidad();
+            if(cardinalidad1 == conjunto2.getCardinalidad())
+                if(conjunto2.interseccion(conjunto1).getCardinalidad() == cardinalidad1)
+                    iguales = true;        
+        }// end outter-if
+        return iguales;
+    }
     /**
      * @param args the command line arguments
      */
@@ -130,6 +146,13 @@ public class Conjuntos {
         System.out.println(encuentraAlumnosinglesYFrances(ingles, frances));
         System.out.println(encuentraSoloIngles(ingles, frances, otros));
         System.out.println(encuentraTresIdiomas(ingles, frances, otros));
+        
+        
+        
+        System.out.println();
+        
+        
+        
     }
     
 }
