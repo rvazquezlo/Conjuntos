@@ -129,6 +129,29 @@ public class ConjuntoA<T> implements ConjuntoADT<T>{
         return union;
     }
     
+    public ConjuntoADT<T> unionRecursiva(ConjuntoADT<T> otro){
+        ConjuntoADT<T> union;
+        Iterator<T> iteradorOtro, iterador;
+        
+        try{
+            union = new ConjuntoA<T>();
+            iterador = this.iterator();
+            unionRecursiva(iterador, union); 
+            iteradorOtro = otro.iterator();
+            unionRecursiva(iteradorOtro, union);
+        }catch(NullPointerException e){
+            union = null;
+        }
+        return union;
+    }
+    
+    private void unionRecursiva(Iterator<T> iterador, ConjuntoADT<T> union){
+        if(iterador.hasNext()){
+            union.add(iterador.next());
+            unionRecursiva(iterador, union);
+        }
+    }
+    
     public ConjuntoADT<T> interseccion(ConjuntoADT<T> otro){
         ConjuntoADT<T> interseccion;
         Iterator<T> iteradorOtro;
@@ -148,6 +171,30 @@ public class ConjuntoA<T> implements ConjuntoADT<T>{
         return interseccion;
     }
 
+    public ConjuntoADT<T> interseccionRecursiva(ConjuntoADT<T> otro){
+        ConjuntoADT<T> interseccion;
+        Iterator<T> iteradorOtro;
+        
+        try{
+            interseccion = new ConjuntoA<T>();
+            iteradorOtro = otro.iterator();
+            interseccionRecursiva(iteradorOtro, interseccion);
+        }catch(NullPointerException e){
+            interseccion = null;
+        }
+        return interseccion;
+    }
+    
+    private void interseccionRecursiva(Iterator<T> iterador, ConjuntoADT<T> interseccion){
+        T elemento;
+        
+        if(iterador.hasNext()){
+            elemento = iterador.next();
+            if(contains(elemento))
+                interseccion.add(elemento);
+            interseccionRecursiva(iterador, interseccion);
+        }
+    }
     /**
      * Elementos del calling object que no estén en otro
      * @param otro
@@ -171,6 +218,32 @@ public class ConjuntoA<T> implements ConjuntoADT<T>{
             diferencia = null;
         }
         return diferencia;
+    }
+    
+    public ConjuntoADT<T> diferenciaRecursiva(ConjuntoADT<T> otro){
+        ConjuntoADT<T> diferencia;
+        Iterator<T> iterador;
+        
+        
+        iterador = this.iterator();
+        diferencia = new ConjuntoA<T>();
+        diferenciaRecursiva(iterador, diferencia, otro);
+        return diferencia;
+    }
+    
+    private void diferenciaRecursiva(Iterator<T> iterador, ConjuntoADT<T> diferencia, ConjuntoADT<T> otro){
+        T elemento;
+        
+        try{
+            if(iterador.hasNext()){
+                elemento = iterador.next();
+                if(!otro.contains(elemento))
+                    diferencia.add(elemento);
+                diferenciaRecursiva(iterador, diferencia, otro);
+            }
+        }catch(NullPointerException e){
+            diferencia = null;
+        }       
     }
 
     @Override
